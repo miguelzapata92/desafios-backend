@@ -57,12 +57,11 @@ async function ejecutarDesafio(){
 
     //Buscamos por id
 
-    idSearch = await contenedor.getById(3);
-    console.log(`El id buscado es: ${idSearch}`); 
+    idSearch = await contenedor.getById(1);
 
     //Eliminamos por id
 
-    //idEliminado = await contenedor.deleteById(2);
+    idEliminado = await contenedor.deleteById(2);
     
 }
 
