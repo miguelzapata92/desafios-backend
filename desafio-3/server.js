@@ -6,10 +6,8 @@ const PORT = 8080;
 
 const app = express();
 app.get('/', (req, res) => {
-    res.send("todo ok");
+    res.send("Prueba Ok");
 })
-
-
 
 app.get('/productos', async (req, res) =>{
     
@@ -26,23 +24,19 @@ app.get('/productos', async (req, res) =>{
     }
 })
 
-
-
-
-
 app.get('/productoRandom', async (req, res) =>{
     //devolver producto al azar
        try {
-
+    //Obtengo numero random
         let numRandom = () => {
-            return Math.floor(Math.random() * (2,3) * 1
+            return Math.ceil(Math.random() * (2,3) * 1
             )
         }
+        //creo una instancia de la clase contenedor
         const contenedor = new Contenedor('./productos.txt');
-        
+    
         let productoRandom = await contenedor.getById(numRandom());
-        
-        
+             
         res.json(productoRandom);
 
     } catch(error){
