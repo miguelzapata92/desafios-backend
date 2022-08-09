@@ -40,7 +40,7 @@ class Contenedor{
     async getById(id) {
 
         const objetos = await this.getAll();
-        const objetoNuevo = objetos.find(elemento => elemento.id = id);
+        const objetoNuevo = objetos.find(elemento => elemento.id === id);
         console.log(objetoNuevo);
         return objetoNuevo;
 

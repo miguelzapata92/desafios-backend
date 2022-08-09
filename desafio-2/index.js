@@ -61,7 +61,7 @@ async function ejecutarDesafio(){
 
     //Eliminamos por id
 
-    idEliminado = await contenedor.deleteById(2);
+    //idEliminado = await contenedor.deleteById(2);
     
 }
 
