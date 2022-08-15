@@ -6,29 +6,43 @@ const app = express();
 const PORT = 8080
 
 //creo el enrutador
-const productos = Router();
+const router = Router();
 
 const frase = "todo ok";
+const id = 2
 
-productos.get('/', (req, res) =>{
+router.get(`/productos`, (req, res) =>{
     // Devuelve todos los productos
     res.send(frase)
 })
 
-productos.get('/', (req, res) =>{
+router.get(`/productos/:${id}`, (req, res) =>{
+    //si el id no existe se devolvera el objeto error
+
+
     // Devuelve todos los productos según su ID
+
+    
 })
 
-productos.post('/', (req, res) => {
+router.post('/productos', (req, res) => {
     //recibe y agrega un producto según su id
 })
 
-productos.delete('/', (req, res) => {
+router.put(`/productos/:${id}`, (req, res) => {
+
+})
+
+router.delete(`/productos/:${id}`, (req, res) => {
+    //si el id no existe se devolvera el objeto error
+
     //elimina un producto según su id
 })
 
+app.use('/api', router)
 
 
 app.listen(PORT, () => {
     console.log(`Server on port ${PORT}`)
 })
+
