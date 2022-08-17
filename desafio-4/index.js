@@ -25,6 +25,7 @@ router.get('/:id', (req, res)=> {
 })
 
 router.post('/', (req, res)=> {
+    //recibe y agrega un producto, lo devuelve con su id
     const data = req.body;
 
     listaProductos.push(data);
@@ -36,7 +37,7 @@ router.put('/:id', (req, res)=> {
     //recibe y actualiza un producto segun su id
     let idProducto = req.params.id
     
-    res.send("get ok")
+    res.send(`get ok ${idProducto}`);
 })
 
 router.delete('/:id', (req, res)=> {
