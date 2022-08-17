@@ -1,48 +1,57 @@
 const express = require('express');
-const { Router } = express;
+const {Router} = express;
 
 const app = express();
 
-const PORT = 8080
+//middlewares
+app.use(express.json())
+app.use(express.urlencoded({extended : true}));
 
-//creo el enrutador
 const router = Router();
 
-const frase = "todo ok";
-const id = 2
+const listaProductos = [];
 
-router.get(`/productos`, (req, res) =>{
-    // Devuelve todos los productos
-    res.send(frase)
+
+router.get('/', (req, res)=> {
+    //devuelve todos los productos
+    res.send(listaProductos)
 })
 
-router.get(`/productos/:${id}`, (req, res) =>{
-    //si el id no existe se devolvera el objeto error
+router.get('/:id', (req, res)=> {   
+    //devuelve un producto según su id
+    const id = req.params.id
+    const producto = listaProductos.filter(e=> e.id == id)
+    res.send(producto)
+})
+
+router.post('/', (req, res)=> {
+    const data = req.body;
+
+    listaProductos.push(data);
+    res.send(listaProductos)
+})
 
 
-    // Devuelve todos los productos según su ID
-
+router.put('/:id', (req, res)=> {
+    //recibe y actualiza un producto segun su id
+    let idProducto = req.params.id
     
+    res.send("get ok")
 })
 
-router.post('/productos', (req, res) => {
-    //recibe y agrega un producto según su id
+router.delete('/:id', (req, res)=> {
+    //elimina un producto segun su id
+    let idProducto = req.params.id
+    listaProductos.splice(idProducto + 1, 1)
+    res.send(listaProductos);
 })
 
-router.put(`/productos/:${id}`, (req, res) => {
-
-})
-
-router.delete(`/productos/:${id}`, (req, res) => {
-    //si el id no existe se devolvera el objeto error
-
-    //elimina un producto según su id
-})
-
-app.use('/api', router)
+app.use('/api/productos', router);
 
 
-app.listen(PORT, () => {
-    console.log(`Server on port ${PORT}`)
+const PORT = 8080;
+
+app.listen(PORT, () =>{
+    console.log("server on")
 })
 
