@@ -17,7 +17,8 @@ app.use('/api/productos', require('./routes/routes'))
 
 const PORT = 8080;
 
-app.listen(PORT, () =>{
-    console.log("server on")
+const server = app.listen(PORT, () =>{
+    console.log(`Server On ${PORT}`)
 })
+server.on('error', error => console.log(`Error en el servidor: ${error}`));
 

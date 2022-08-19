@@ -11,9 +11,12 @@ router.get('/', (req, res)=> {
 })
 
 router.get('/:id', (req, res)=> {   
+    const idProducto = req.params.id
+    if(!idProducto){
+        res.status(400).json({ error : 'El producto solicitado no existe'})
+    }
     //devuelve un producto según su id
-    const id = req.params.id
-    const producto = listaProductos.filter(e=> e.id == id)
+    const producto = listaProductos.filter(e=> e.id == idProducto)
     res.send(producto)
 })
 
@@ -27,16 +30,21 @@ router.post('/', (req, res)=> {
 
 
 router.put('/:id', (req, res)=> {
+    
     //recibe y actualiza un producto segun su id
     const idProducto = req.params.id
     if(!idProducto){
         res.status(400).json({ error : 'El producto solicitado no existe'})
     }
-    const producto = listaProductos.filter(e=> e.id == id)
-    producto.title = nombre;
-    producto.price = title;
-    producto.thumbnail = thumbnail;
-    res.send(producto);
+    let producto = listaProductos.find(element => element.id = idProducto)
+    let productoNuevo = {
+        "title": req.body.title ? req.body.title : producto.title,
+        "price": req.body.price ? req.body.price : producto.price,
+        "thumbnail": req.body.thumbnail ? req.body.thumbnail : producto.thumbnail,
+        "id": producto.id
+    }
+    producto = productoNuevo;
+    res.send(producto)
 })
 
 router.delete('/:id', (req, res)=> {
