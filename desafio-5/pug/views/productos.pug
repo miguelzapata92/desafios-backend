@@ -1,0 +1,32 @@
+
+html(lang='en')
+head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title= Documento
+    link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous")
+body.p-4
+
+section.p-4.bg-secondary
+    h2.text-primary Vista de Productos
+    if listaProductos.length===0
+        div.mt-4
+        h2.bg-light.p-4.text-danger No se encontraron productos
+    else
+        table.table.table-dark
+            thead
+                tr
+                    th Nombre
+                    th Precio
+                    th Foto
+            tbody
+                each producto in listaProductos
+                    tr.text-center
+                        td.align-middle= producto.name
+                        td.align-middle= producto.price
+                        td.align-middle
+                            img(src=producto.picture alt=producto.name)
+    div.mt-3
+    a(href="./productos")
+        button.btn.btn-warning Agregar producto
