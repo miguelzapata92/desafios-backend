@@ -1,6 +1,8 @@
 const express = require('express');
-const path = require('path');
 const { engine } = require('express-handlebars');
+const router = require('./routes/routes');
+
+const path = require('path')
 
 const app = express();
 
@@ -8,15 +10,13 @@ const app = express();
 app.use(express.json())
 app.use(express.urlencoded({extended : true}));
 
-app.engine('handlebars', engine({extname: '.hbs'}));
+app.engine('.hbs', engine({ extname: '.hbs' }))
 //seteamos el view engine
 app.set('view engine', '.hbs');
 //aca le decimos donde van a estar las vistas
-app.set('views', './views');
+app.set('views',  path.join(__dirname, 'views'));
 
-
-
-app.use('/', require('./routes/routes'))
+app.use('/', router);
 
 const PORT = 8080;
 

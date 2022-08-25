@@ -1,15 +1,28 @@
+
+
 <section>
     <h2>Por favor ingrese un producto</h2>
  <form id="form" action="/productos">
-        <input type="text" id="title" name="title" placeholder="title">
 
-        <input type="number" id="price" name="price" placeholder="Price">
+        <div class="mb-3">        
+            <label class='form-label fw-bold' for='name'>Nombre</label>
+             <input class="form-control" type="text" id="title" name="title" placeholder="title">
+        </div>
 
-        <input type="text" id="thumbnail" name="thumbnail" placeholder="thumbnail">
-            
-        <button type="submit" id="cargar-integrantes">Cargar</button>
+        <div class="mb-3">
+            <label class='form-label fw-bold' for='price'>Precio</label>
+            <input class="form-control" type="number" id="price" name="price" placeholder="price">
+        </div>
+   
+        <div class="mb-3">
+            <label class='form-label fw-bold' for='picture'>Foto URL</label>
+            <input class="form-control" type="text" id="thumbnail" name="thumbnail" placeholder="thumbnail">
+        </div>
 
-        <button type="reset" id="resetear">Limpiar</button>
+        
+        <button class="btn btn-success" type="submit">Cargar</button>
+
+        <button class="btn btn-success" type="reset" >Limpiar</button>
     </form>
     <div>
         <a href="./listaproductos">
