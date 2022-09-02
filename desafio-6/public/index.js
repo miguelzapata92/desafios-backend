@@ -1,4 +1,5 @@
-const socket = io.connect()
+console.log("script ok")
+const socket = io.connect();
 
 const button = document.getElementById("submit");
 
@@ -12,3 +13,11 @@ button?.addEventListener("click", () => {
     document.getElementById('form').reset();
     socket.emit('new-product', product);
 })
+
+socket.on("new-chat-message", messages =>{
+    //parte de renderizado
+
+    const html = messages.map(message =>{
+        return (`<div><strong>${message.name}</strong>:<em>${message.message}</em></div>`)
+    }).join(' ') //el join agrega ese espacio a cada uno de los elementos del array
+    document.getElementById("chat").innerHTML = html})
