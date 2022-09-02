@@ -10,6 +10,7 @@ const app = express();
 //middlewares
 app.use(express.json())
 app.use(express.urlencoded({extended : true}));
+app.use(express.static(path.join(__dirname, 'public')))
 
 const http= new HttpServer(app);
 const io = new IOServer(http);
@@ -22,32 +23,9 @@ app.set('views',  path.join(__dirname, 'views'));
 
 app.use('/', router);
 
-io.on('connection', async (socket) => {
-    console.log('a user connected')
-  
-    socket.emit('servidor_todos_los_productos', productos)
-  
-    const chatINFO = await leerChat()
-  
-    socket.emit('servidor_todos_los_mensajes', chatINFO)
-  
-    socket.on('cliente_nuevo_producto_guardado', async data => {
-      await guardarProducto(data)
-      io.sockets.emit('servidor_todos_los_productos', productos)
-    })
-  
-    socket.on('cliente_nuevo_mensaje_chat', async data => {
-      await insertarChat(data)
-      io.sockets.emit('servidor_todos_los_mensajes', await leerChat())
-    })
+io.on('connection', (socket) => {
+    console.log('Usuario Conectado')
   })
-
-
-
-
-
-
-
 
 const PORT = 8080;
 
