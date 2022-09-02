@@ -1,8 +1,7 @@
 
-
 <section>
     <h2>Por favor ingrese un producto</h2>
- <form id="form" action="/productos">
+ <form id="form" >
 
         <div class="mb-3">        
             <label class='form-label fw-bold' for='name'>Nombre</label>
@@ -16,14 +15,14 @@
    
         <div class="mb-3">
             <label class='form-label fw-bold' for='picture'>Foto URL</label>
-            <input class="form-control" type="text" id="thumbnail" name="thumbnail" placeholder="thumbnail">
+            <input class="form-control" type="text" id="picture" name="picture" placeholder="picture">
         </div>
 
         
-        <button class="btn btn-success" type="submit">Cargar</button>
+        <button id="submit" class="btn btn-success" type="submit">Cargar</button>
 
         <button class="btn btn-success" type="reset" >Limpiar</button>
     </form>
-    <div id="view"></div>
-
+<hr>
 </section>
+

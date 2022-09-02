@@ -20,4 +20,4 @@ router.get('/listaproductos', (req, res) => {
     res.render('productos', { listaProductos });
 })
 
-module.exports = router;
+module.exports = {router, listaProductos};
