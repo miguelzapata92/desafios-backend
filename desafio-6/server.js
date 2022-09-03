@@ -25,8 +25,19 @@ app.set('views',  path.join(__dirname, 'views'));
 
 app.use('/', router);
 
+const messages= [];
+
+
 io.on('connection', (socket) => {
     console.log('Usuario Conectado')
+
+    socket.on("new-message", message =>{
+      console.log(message);
+      socket.emit("new-chat-message", messages)
+      messages.push(message);
+
+      io.sockets.emit("new-chat-messages", messages)
+    })
   })
 
 const PORT = 8080;
