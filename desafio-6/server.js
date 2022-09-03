@@ -31,8 +31,7 @@ io.on('connection', (socket) => {
 
 const PORT = 8080;
 
-const server = app.listen(PORT, () =>{
-    console.log(`Server On ${PORT}`)
-})
-server.on('error', error => console.log(`Error en el servidor: ${error}`));
+http.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+
+//server.on('error', error => console.log(`Error en el servidor: ${error}`));
 

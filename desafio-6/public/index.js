@@ -1,5 +1,5 @@
 console.log("script ok")
-const socket = io.connect();
+const socket = io();
 
 const button = document.getElementById("submit");
 
