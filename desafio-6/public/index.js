@@ -1,11 +1,12 @@
 console.log("script ok")
 const socket = io();
-const productos = []
+
+
+
+
 
 const button = document.getElementById("submit");
-const buttonMessage = document.getElementById("buttonMessage");
-
-
+//Cargar Productos
 button?.addEventListener("click", () => {
     console.log("todo ok")
     const product = {
@@ -16,11 +17,22 @@ button?.addEventListener("click", () => {
     socket.emit('new-product', product);
 })
 
-
-
+socket.on("new-products", products => {
+    document.getElementById('lista').innerHTML = ''
+    console.log(products);
+    const html = products.map(product =>{
+        return  (`
+        <tr> 
+            <td>${product.title}</td>
+            <td>$ ${product.price}</td>
+            <td> ${product.thumbnail}</td>
+        </tr>`)})
+    document.getElementById("lista").innerHTML = html})
 
 
 //chat
+
+const buttonMessage = document.getElementById("buttonMessage");
 buttonMessage?.addEventListener("click", () => {
     console.log("chat ok")
     const message = {
@@ -51,4 +63,4 @@ socket.on("lista productos", productos =>{
     const html = messages.map(message =>{
         return (`<div><strong>${message.name}</strong>:<em>${message.message}</em></div>`)
     }).join(' ') //el join agrega ese espacio a cada uno de los elementos del array
-    document.getElementById("chat").innerHTML = html})
+    document.getElementById("chat").innerHTML = html;})

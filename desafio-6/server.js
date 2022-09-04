@@ -25,24 +25,35 @@ app.set('views',  path.join(__dirname, 'views'));
 
 app.use('/', router);
 
-const messages= [];
-
+let messages= [];
+const products = [];
 
 io.on('connection', (socket) => {
     console.log('Usuario Conectado')
 
+    //CargarProductos
+    socket.on("new-product", product => {
+      console.log(product);
+      socket.emit("new-products", products)
+      products.push(product);
+       
+      io.sockets.emit("new-products", products)
+    })
+
+
+    //chat
     socket.on("new-message", message =>{
       console.log(message);
       socket.emit("new-chat-message", messages)
       messages.push(message);
 
-      io.sockets.emit("new-chat-messages", messages)
-    })
+      io.sockets.emit("new-chat-message", messages)
   })
+})
 
 const PORT = 8080;
 
 http.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 
-//server.on('error', error => console.log(`Error en el servidor: ${error}`));
+http.on('error', error => console.log(`Error en el servidor: ${error}`));
 

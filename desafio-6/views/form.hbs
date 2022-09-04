@@ -24,7 +24,28 @@
         <button class="btn btn-success" type="reset" >Limpiar</button>
     </form>
     <hr>
-    <div id="lista"></div>
+<div class='container mt-5'>
+    <div class='row'>
+        <div class='col'>
+            <table class='table'>
+                <thead class='table-dark'>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Foto URL</th>
+                </thead>
+                <tbody id="lista">
+                    {{!-- {{#each lista}}
+                    <tr>
+                        <td>{{this.title}}</td>
+                        <td>{{this.price}}</td>
+                        <td>AR${{this.thumbnail}}</td>
+                    </tr>
+                    {{/each}} --}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
     <div id="chat">
         
         <div class="mb-3">        
