@@ -29,14 +29,17 @@ socket.on("new-products", products => {
         </tr>`)})
     document.getElementById("lista").innerHTML = html})
 
-
 //chat
 
 const buttonMessage = document.getElementById("buttonMessage");
 buttonMessage?.addEventListener("click", () => {
     console.log("chat ok")
+    d = new Date();
+    const date = `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`
+
     const message = {
         email: document.getElementById("email").value,
+        date: date,
         message: document.getElementById("message").value
     }
     socket.emit('new-message', message);
@@ -44,7 +47,14 @@ buttonMessage?.addEventListener("click", () => {
 
 socket.on("new-chat-message", messages =>{
     const html = messages.map(message =>{
-        return (`<div><strong>${message.email}</strong>:<em>${message.message}</em></div>`)
+        
+        return (`
+        <div style="width:100vw">
+            <span class="fw-bold" style="color: blue;">${message.email}</span>
+            <span style="color: brown;">&nbsp[${message.date}]</span>
+            <span class="fst-italic" style="color: green;">&nbsp: ${message.message}</span>
+        </div>
+    `)
     }).join(' ') //el join agrega ese espacio a cada uno de los elementos del array
     document.getElementById("viewchat").innerHTML = html})
 
