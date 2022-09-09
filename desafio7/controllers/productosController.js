@@ -1,7 +1,17 @@
+import fs from 'fs';
 const listaProductos = [];
 
-const getAllProducts = (req, res) => {
-    res.send(listaProductos)
+const readAndParseFile = async (file) =>{
+    try{
+        const data = await fs.promises.readFile(file, 'utf-8', (err, data) => {         
+            if(err) throw err
+            return data
+        })
+        return JSON.parse(data)                                                        
+    } catch (error) {
+        console.error(`El error es: ${error}`)
+    }
+    
 }
 
 const getProductById = (req, res) => {
@@ -46,4 +56,4 @@ const deleteProduct = (req, res) => {
     res.send(listaProductos);
 }
 
-export { listaProductos, getAllProducts, getProductById, addProduct, updateProduct, deleteProduct}
+export { listaProductos, getProductById, addProduct, updateProduct, deleteProduct}

@@ -1,13 +1,15 @@
-const express = require('express');
-
+import express from 'express';
+import productoRouter from './routes/routesProducto.js';
+import carritoRouter from './routes/routesCarrito.js'
+import path from 'path';
 
 const app = express();
 //middlewares
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-app.use('/api/productos', require('./routes/routesProducto'));
-app.use('/api/carrito', require('./routes/routesCarrito'));
+app.use('/api/productos', productoRouter);
+app.use('/api/carrito', carritoRouter);
 
 const PORT = process.env.PORT || 8080;
 

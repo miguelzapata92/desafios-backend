@@ -1,9 +1,9 @@
-const express= require('express')
+import express from 'express';
 
-const router = express.Router();
-
-
+const carritoRouter = express.Router();
 
 
 
-module.exports = router
+
+
+export default carritoRouter 
