@@ -1,35 +1,62 @@
 import fs from 'fs';
+import { fileURLToPath } from 'url'
+import path from 'path'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+const dataProducts = path.join(__dirname, '../databases/productos.txt')
+
+
 const listaProductos = [];
 
-const readAndParseFile = async (file) =>{
-    try{
-        const data = await fs.promises.readFile(file, 'utf-8', (err, data) => {         
+const readAndParseFile = async (file) => {  // Esta funcion se utiliza para leer el archivo y parsear a JSON la informacion, para su posterior uso
+
+    try {
+        const data = await fs.promises.readFile(file, 'utf-8', (err, data) => {         // Consultamos por la informacion
             if(err) throw err
             return data
         })
-        return JSON.parse(data)                                                        
+        return JSON.parse(data)                                                         // Retornamos la informacion parseada
     } catch (error) {
         console.error(`El error es: ${error}`)
     }
-    
 }
 
-const getProductById = (req, res) => {
+const getProductById = async (req, res) => {
     const idProducto = req.params.id
-    if(!idProducto){
-        res.status(400).json({ error : 'El producto solicitado no existe'})
+    try {
+        const data = await readAndParseFile(dataProducts)
+        if(!idProducto){
+            res.status(400).json({ error : 'El producto solicitado no existe'})
+        }
+        //devuelve un producto según su id
+        const producto = data.filter(e=> e.id == idProducto)
+        res.send(producto)
+    } catch (error) {
+        
     }
-    //devuelve un producto según su id
-    const producto = listaProductos.filter(e=> e.id == idProducto)
-    res.send(producto)
 }
 
-const addProduct = (req, res) => {
-    //recibe y agrega un producto, lo devuelve con su id
-    const data = req.body;
-    listaProductos.push(data);
+const addProduct = async (req, res) => {
+
+    const product = req.body;
+
+    try {
+        const dbProduct = readAndParseFile(dataProducts);
+        dbProduct.push(product);
+        await fs.writeFile('./databases/productos.txt', JSON.stringify(dbProduct, null, 2), err => {
+            if(err) throw err
+        })
+        
+    } catch (error) {
+        console.error(`El error es: ${error}`)
+    }
+
+    res.send(product)
+
+    /*listaProductos.push(data);
     data.id = listaProductos.length;
-    res.send(listaProductos)
+    res.send(listaProductos)*/
 }
 
 const updateProduct = (req, res) => {
@@ -40,10 +67,11 @@ const updateProduct = (req, res) => {
     }
     let producto = listaProductos.find(element => element.id = idProducto)
     let productoNuevo = {
-        "title": req.body.title ? req.body.title : producto.title,
+        "id": producto.id,
+        "name": req.body.name ? req.body.name : producto.name,
         "price": req.body.price ? req.body.price : producto.price,
         "thumbnail": req.body.thumbnail ? req.body.thumbnail : producto.thumbnail,
-        "id": producto.id
+        
     }
     producto = productoNuevo;
     res.send(producto)

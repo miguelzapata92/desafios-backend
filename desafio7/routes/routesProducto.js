@@ -1,5 +1,6 @@
 import express from 'express';
 
+
 import { getProductById, addProduct, updateProduct, deleteProduct} from '../controllers/productosController.js'; 
 const productoRouter = express.Router();
 
