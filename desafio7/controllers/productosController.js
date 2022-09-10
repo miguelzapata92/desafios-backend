@@ -1,6 +1,7 @@
 import fs from 'fs';
 import { fileURLToPath } from 'url'
 import path from 'path'
+import { json } from 'express';
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -12,11 +13,9 @@ const listaProductos = [];
 const readAndParseFile = async (file) => {  // Esta funcion se utiliza para leer el archivo y parsear a JSON la informacion, para su posterior uso
 
     try {
-        const data = await fs.promises.readFile(file, 'utf-8', (err, data) => {         // Consultamos por la informacion
-            if(err) throw err
-            return data
-        })
-        return JSON.parse(data)                                                         // Retornamos la informacion parseada
+        const data = await fs.promises.readFile(file, 'utf-8')
+        const parsedData = JSON.parse(data);
+        return parsedData;                                                       // Retornamos la informacion parseada
     } catch (error) {
         console.error(`El error es: ${error}`)
     }
