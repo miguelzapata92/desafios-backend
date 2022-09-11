@@ -8,11 +8,11 @@ const __dirname = path.dirname(__filename)
 const dataProducts = path.join(__dirname, '../databases/productos.txt')
 
 
-const listaProductos = [];
+const administrador = true;
 
-const readAndParseFile = async () => {  
+const readAndParseFile = async (file) => {  
     try {
-        const data = await fs.promises.readFile(dataProducts, 'utf-8')
+        const data = await fs.promises.readFile(file, 'utf-8')
         const parsedData = JSON.parse(data);
         return parsedData;                                                       
     } catch (error) {
@@ -24,7 +24,7 @@ const readAndParseFile = async () => {
 const getProductById = async (req, res) => {
     const idProducto = req.params.id
     try {
-        const data = await readAndParseFile()
+        const data = await readAndParseFile(dataProducts)
 
         //devuelve un producto según su id
         const producto = data.filter(e=> e.id == idProducto)
@@ -44,11 +44,11 @@ const addProduct = async (req, res) => {
     const product = req.body;
 
     try {
-        const dbProduct = await readAndParseFile();
+        const dbProduct = await readAndParseFile(dataProducts);
         product.id = dbProduct.length + 1;                                                                  // Insertamos el ID en el producto
         product.timeStamp = Date.now()   
         dbProduct.push(product);
-        await fs.promises.writeFile('./databases/productos.txt', JSON.stringify(dbProduct, null, 2), err => {
+        await fs.promises.writeFile(dataProducts, JSON.stringify(dbProduct, null, 2), err => {
             if(err) throw err
         })
         
@@ -63,29 +63,63 @@ const addProduct = async (req, res) => {
     res.send(listaProductos)*/
 }
 
-const updateProduct = (req, res) => {
+const updateProduct = async (req, res) => {
     //recibe y actualiza un producto segun su id
     const idProducto = req.params.id
-    if(!idProducto){
-        res.status(400).json({ error : 'El producto solicitado no existe'})
+   
+    try {
+        const dbProduct = await readAndParseFile(dataProducts);
+        if(dbProduct.idProducto = false){
+            res.status(400).json({ error : 'El producto solicitado no existe'})
+        }
+        let producto = dbProduct.find(element => element.id = idProducto)
+        let productoNuevo = {
+            "name": req.body.name ? req.body.name : producto.name,
+            "price": req.body.price ? req.body.price : producto.price,
+            "urlImage": req.body.urlImage ? req.body.urlImage : producto.urlImage,
+            "description": req.body.description ? req.body.description : producto.description,
+            "code": req.body.code ? req.body.code : producto.code,
+            "stock": req.body.stock ? req.body.stock : producto.stock,
+            "id": producto.id,
+        }
+        producto = productoNuevo;
+        await fs.promises.writeFile(dataProducts, JSON.stringify(dbProduct, null, 2), err=>{
+            if(err) throw err
+        })
+        res.send(producto)
+    } catch (error) {
+        console.log(error)
     }
-    let producto = listaProductos.find(element => element.id = idProducto)
-    let productoNuevo = {
-        "id": producto.id,
-        "name": req.body.name ? req.body.name : producto.name,
-        "price": req.body.price ? req.body.price : producto.price,
-        "thumbnail": req.body.thumbnail ? req.body.thumbnail : producto.thumbnail,
-        
-    }
-    producto = productoNuevo;
-    res.send(producto)
+
 }
 
-const deleteProduct = (req, res) => {
+const deleteProduct = async (req, res) => {
     //elimina un producto segun su id
-    let idProducto = req.params.id
-    listaProductos.splice(idProducto -1 , 1)
-    res.send(listaProductos);
+
+    if (administrador) {
+        let idProducto = req.params.id
+        try {
+            const dbProduct = await readAndParseFile(dataProducts)
+            const prodIndex = dbProduct.findIndex(product => product.id == idProducto)                             
+            if ( prodIndex != -1) {                                                                     
+                dbProduct.splice(prodIndex, 1)                                                            
+                await fs.promises.writeFile(dataProducts, JSON.stringify(dbProduct, null, 2), err => {     
+                    if(err) throw err
+                })
+                res.status(200).json({ message : 'Se ha borrado el producto con éxito' })
+            } else {
+                res.status(400).json({ error : 'id no existente' })
+            }
+        res.send(listaProductos);
+    } catch (error) {
+         console.log(error);
+        }
+    } else {
+        res.status(400).json({ message : 'Usted no tiene permiso para acceder a estas funcionalidades' })
+    }
+    
+    
+
 }
 
-export { listaProductos, getProductById, addProduct, updateProduct, deleteProduct}
+export { getProductById, addProduct, updateProduct, deleteProduct}

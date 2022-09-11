@@ -1,5 +1,7 @@
 [
-  {},
+  {
+    "id": "12"
+  },
   {
     "name": "name",
     "price": "descripción",
@@ -65,15 +67,5 @@
     "stock": 12,
     "id": 8,
     "timeStamp": 1662843227803
-  },
-  {
-    "name": "name",
-    "price": "descripción",
-    "urlImage": "código",
-    "description": "https://placeimg.com/640/480/any",
-    "code": 111,
-    "stock": 12,
-    "id": 9,
-    "timeStamp": 1662843228524
   }
 ]
