@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { fileURLToPath } from 'url'
 import path from 'path'
-import { json } from 'express';
+
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -10,29 +10,32 @@ const dataProducts = path.join(__dirname, '../databases/productos.txt')
 
 const listaProductos = [];
 
-const readAndParseFile = async (file) => {  // Esta funcion se utiliza para leer el archivo y parsear a JSON la informacion, para su posterior uso
-
+const readAndParseFile = async () => {  
     try {
-        const data = await fs.promises.readFile(file, 'utf-8')
+        const data = await fs.promises.readFile(dataProducts, 'utf-8')
         const parsedData = JSON.parse(data);
-        return parsedData;                                                       // Retornamos la informacion parseada
+        return parsedData;                                                       
     } catch (error) {
         console.error(`El error es: ${error}`)
     }
 }
 
+
 const getProductById = async (req, res) => {
     const idProducto = req.params.id
     try {
-        const data = await readAndParseFile(dataProducts)
-        if(!idProducto){
-            res.status(400).json({ error : 'El producto solicitado no existe'})
-        }
+        const data = await readAndParseFile()
+
         //devuelve un producto según su id
         const producto = data.filter(e=> e.id == idProducto)
-        res.send(producto)
+      
+        if(producto){
+            res.send(producto)
+        }else{
+            res.status(400).json({ error : 'El producto solicitado no existe'})
+        }
     } catch (error) {
-        
+        console.log(error)
     }
 }
 
@@ -41,9 +44,11 @@ const addProduct = async (req, res) => {
     const product = req.body;
 
     try {
-        const dbProduct = readAndParseFile(dataProducts);
+        const dbProduct = await readAndParseFile();
+        product.id = dbProduct.length + 1;                                                                  // Insertamos el ID en el producto
+        product.timeStamp = Date.now()   
         dbProduct.push(product);
-        await fs.writeFile('./databases/productos.txt', JSON.stringify(dbProduct, null, 2), err => {
+        await fs.promises.writeFile('./databases/productos.txt', JSON.stringify(dbProduct, null, 2), err => {
             if(err) throw err
         })
         

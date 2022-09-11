@@ -1,0 +1,79 @@
+[
+  {},
+  {
+    "name": "name",
+    "price": "descripción",
+    "urlImage": "código",
+    "description": "https://placeimg.com/640/480/any",
+    "code": 111,
+    "stock": 12
+  },
+  {
+    "name": "name",
+    "price": "descripción",
+    "urlImage": "código",
+    "description": "https://placeimg.com/640/480/any",
+    "code": 111,
+    "stock": 13
+  },
+  {
+    "name": "name",
+    "price": "descripción",
+    "urlImage": "código",
+    "description": "https://placeimg.com/640/480/any",
+    "code": 111,
+    "stock": 12,
+    "id": null,
+    "timeStamp": 1662843186484
+  },
+  {
+    "name": "name",
+    "price": "descripción",
+    "urlImage": "código",
+    "description": "https://placeimg.com/640/480/any",
+    "code": 111,
+    "stock": 12,
+    "id": 5,
+    "timeStamp": 1662843223829
+  },
+  {
+    "name": "name",
+    "price": "descripción",
+    "urlImage": "código",
+    "description": "https://placeimg.com/640/480/any",
+    "code": 111,
+    "stock": 12,
+    "id": 6,
+    "timeStamp": 1662843225716
+  },
+  {
+    "name": "name",
+    "price": "descripción",
+    "urlImage": "código",
+    "description": "https://placeimg.com/640/480/any",
+    "code": 111,
+    "stock": 12,
+    "id": 7,
+    "timeStamp": 1662843226925
+  },
+  {
+    "name": "name",
+    "price": "descripción",
+    "urlImage": "código",
+    "description": "https://placeimg.com/640/480/any",
+    "code": 111,
+    "stock": 12,
+    "id": 8,
+    "timeStamp": 1662843227803
+  },
+  {
+    "name": "name",
+    "price": "descripción",
+    "urlImage": "código",
+    "description": "https://placeimg.com/640/480/any",
+    "code": 111,
+    "stock": 12,
+    "id": 9,
+    "timeStamp": 1662843228524
+  }
+]
