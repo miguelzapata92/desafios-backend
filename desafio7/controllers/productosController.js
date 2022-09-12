@@ -58,9 +58,6 @@ const addProduct = async (req, res) => {
 
     res.send(product)
 
-    /*listaProductos.push(data);
-    data.id = listaProductos.length;
-    res.send(listaProductos)*/
 }
 
 const updateProduct = async (req, res) => {
@@ -110,7 +107,7 @@ const deleteProduct = async (req, res) => {
             } else {
                 res.status(400).json({ error : 'id no existente' })
             }
-        res.send(listaProductos);
+        res.send(dbProduct);
     } catch (error) {
          console.log(error);
         }
@@ -122,4 +119,4 @@ const deleteProduct = async (req, res) => {
 
 }
 
-export { getProductById, addProduct, updateProduct, deleteProduct}
+export { getProductById, addProduct, updateProduct, deleteProduct};

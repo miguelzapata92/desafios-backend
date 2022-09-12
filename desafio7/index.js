@@ -1,7 +1,6 @@
 import express from 'express';
 import productoRouter from './routes/routesProducto.js';
 import carritoRouter from './routes/routesCarrito.js'
-import path from 'path';
 
 const app = express();
 //middlewares
