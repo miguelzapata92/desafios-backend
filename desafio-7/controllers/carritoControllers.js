@@ -37,7 +37,6 @@ const GetCartById = async (req, res) => {
     const idCarrito = req.params.id
     try {
         const dbCarrito = await readAndParseFile(dataCarrito)
-        //devuelve un carritosegún su id
         const carrito = dbCarrito.filter(e=> e.id == idCarrito)
         
         //devuelve un carritosegún su id
@@ -78,7 +77,7 @@ const DeleteProdInCartByID = async (req, res) => {
             const dbCarrito = await readAndParseFile(dataCarrito);
             const carritoIndex = dbCarrito.findIndex(carrito => carrito.id == idCarrito);
             if (carritoIndex) {                                                               
-                carritoIndex.products.splice(prodIndex, 1)      ;                                              
+                carritoIndex.products.splice(prodIndex, 1);                                              
                 await fs.promises.writeFile(dataCarrito, JSON.stringify(dbCarrito, null, 2), err => {      
                     if(err) throw err
                 })
