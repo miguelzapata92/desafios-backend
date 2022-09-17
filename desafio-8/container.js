@@ -7,5 +7,7 @@ class Container {
         this.knex = knexLib(config);    
     }
 
-     
+    save = data =>{
+        
+    }
 }
