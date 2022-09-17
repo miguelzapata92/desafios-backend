@@ -6,8 +6,10 @@ const { Server: IOServer } = require('socket.io');
 const { router } = require('./routes/routes.js');
 const path = require('path')
 const {promises: fs} = require('fs');
+const { optionsSQLite3, optionsMariaDB } = require('./options/config.js');
 
-
+const products = new Container(optionsSQLite3, 'products');
+const messages = new Container(optionsMariaDB, 'messages')
 
 const app = express();
 const http = new HttpServer(app);
@@ -27,8 +29,7 @@ app.set('views',  path.join(__dirname, 'views'));
 
 app.use('/', router);
 
-let messages= [];
-const products = [];
+
 
 io.on('connection', (socket) => {
     console.log('Usuario Conectado')
