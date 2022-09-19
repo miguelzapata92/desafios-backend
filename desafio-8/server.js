@@ -5,9 +5,8 @@ const { Server: HttpServer} = require('http');
 const { Server: IOServer } = require('socket.io');
 const { router } = require('./routes/routes.js');
 const path = require('path')
-const {promises: fs} = require('fs');
 const { optionsSQLite3, optionsMariaDB } = require('./options/config.js');
-
+const Container = require('./container.js');
 const products = new Container(optionsSQLite3, 'products');
 const messages = new Container(optionsMariaDB, 'messages')
 
@@ -47,41 +46,11 @@ io.on('connection', (socket) => {
     //chat
     socket.on("new-message", async message =>{
       console.log(message);
-      const chatInfo = await leerChat();
-      socket.emit("new-chat-message", messages)
-      messages.push(message);
-      await insertarChat(message);
-      io.sockets.emit("new-chat-message", messages)
+      messages.save(message);
+      const dbMessages = await messages.getAll();
+      io.sockets.emit("new-chat-message", dbMessages);
   })
 })
-
-const leerChat = async () => {
-
-  try {
-      const data = await fs.readFile('chat.txt', 'utf-8', (err, data) => {
-          if(err) throw err
-          return data
-      })
-      return JSON.parse(data) 
-
-  } catch (error) {
-      console.error(`El error es: ${error}`)
-  }
-}
-
-const insertarChat = async (mensaje) => {
-
-  try {
-      const chat = await leerChat() 
-      chat.push(mensaje)
-      await fs.writeFile('chat.txt', JSON.stringify(chat, null, 2), err => {
-      if(err) throw err
-  })
-
-  } catch (error) {
-      console.error(`El error es: ${error}`)
-  }
-}
 
 const PORT = 8080;
 
