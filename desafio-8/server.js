@@ -7,6 +7,8 @@ const { router } = require('./routes/routes.js');
 const path = require('path')
 const { optionsSQLite3, optionsMariaDB } = require('./options/config.js');
 const Container = require('./container.js');
+
+
 const products = new Container(optionsSQLite3, 'products');
 const messages = new Container(optionsMariaDB, 'messages')
 
@@ -34,12 +36,13 @@ io.on('connection', (socket) => {
     console.log('Usuario Conectado')
 
     //CargarProductos
-    socket.on("new-product", product => {
+    socket.on("new-product", async product => {
       console.log(product);
+      products.save(product);
+      
       socket.emit("new-products", products)
-      products.push(product);
-       
-      io.sockets.emit("new-products", products)
+      const dbProducts = await products.getAll();
+      io.sockets.emit("new-products", dbProducts)
     })
 
 
