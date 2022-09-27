@@ -20,9 +20,16 @@ const readAndParseFile = async (file) => {
     }
 }
 
+const getAll = async (req, res) =>{
+    const data = await readAndParseFile(dataProducts);
+    return res.json(data);
+}
+
 
 const getProductById = async (req, res) => {
     const idProducto = req.params.id
+    
+    if(idProducto == undefined) return getAll(req, res);
     try {
         const data = await readAndParseFile(dataProducts)
 
@@ -30,7 +37,7 @@ const getProductById = async (req, res) => {
         const producto = data.filter(e=> e.id == idProducto)
       
         if(producto){
-            res.send(producto)
+            res.json(producto)
         }else{
             res.status(400).json({ error : 'El producto solicitado no existe'})
         }
