@@ -1,0 +1,82 @@
+[
+  {
+    "name": "Martillo",
+    "price": "4565",
+    "urlImage": "none",
+    "description": "None",
+    "code": 111,
+    "stock": 12,
+    "id": 2,
+    "timeStamp": 1662925957434
+  },
+  {
+    "name": "Auricular Logitech",
+    "price": "4900",
+    "urlImage": "none",
+    "description": "None",
+    "code": 111,
+    "stock": 12,
+    "id": 2,
+    "timeStamp": 1663896178100
+  },
+  {
+    "name": "Auricular Noga",
+    "price": "4800",
+    "urlImage": "none",
+    "description": "None",
+    "code": 111,
+    "stock": 12,
+    "id": 3,
+    "timeStamp": 1663896211390
+  },
+  {
+    "name": "Teclado Genius",
+    "price": "3000",
+    "urlImage": "none",
+    "description": "None",
+    "code": 115,
+    "stock": 10,
+    "id": 4,
+    "timeStamp": 1663896238005
+  },
+  {
+    "name": "Teclado Marvo",
+    "price": "4500",
+    "urlImage": "none",
+    "description": "None",
+    "code": 1155,
+    "stock": 1,
+    "id": 5,
+    "timeStamp": 1663896253051
+  },
+  {
+    "name": "Teclado Genérico",
+    "price": "1800",
+    "urlImage": "none",
+    "description": "None",
+    "code": 125,
+    "stock": 1,
+    "id": 6,
+    "timeStamp": 1663896286130
+  },
+  {
+    "name": "Mousepad",
+    "price": "2000",
+    "urlImage": "none",
+    "description": "None",
+    "code": 1231,
+    "stock": 12,
+    "id": 7,
+    "timeStamp": 1663896311330
+  },
+  {
+    "name": "Mouse Marvo",
+    "price": "1232",
+    "urlImage": "none",
+    "description": "None",
+    "code": 12131,
+    "stock": 172,
+    "id": 8,
+    "timeStamp": 1663896330707
+  }
+]

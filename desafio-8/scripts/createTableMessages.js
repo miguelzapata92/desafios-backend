@@ -1,4 +1,4 @@
-const {optionsMariaDB} = require('../options/config');
+const {optionsMariaDB} = require('../options/config.js');
 const knex = require('knex')(optionsMariaDB);
 
 knex.schema.createTable('messages', table =>{
