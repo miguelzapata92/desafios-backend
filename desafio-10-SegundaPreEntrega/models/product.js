@@ -1,8 +1,8 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose"
 
 const productsCollection = "products";
 
-const productsSchema = new mongoose.Schema({
+const productsSchema = new Schema({
     name: {
         type: String,
         required: true,
@@ -42,4 +42,4 @@ const productsSchema = new mongoose.Schema({
     },
 })
 
-export const ProductsModel = mongoose.model(productsCollection, productsSchema);
+export const ProductsModel = model(productsCollection, productsSchema);

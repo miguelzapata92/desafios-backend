@@ -1,4 +1,54 @@
-import fs from 'fs';
+import { productDao } from "../daos/daosPers.js";
+
+const getProductById = async (req, res) => {  
+    try {
+       await productDao.getProductById(req, res)    
+    } catch (error) {
+        res.status(400).json({ error: `${error}` })
+    }  
+}
+
+const saveProduct = async (req, res) => {        
+    try {
+        await productDao.saveProduct(req, res)                                                              
+    } catch (error) {
+        res.status(400).json({ error: `${error}` })
+    }
+}
+
+const updateProductByID = async (req, res) => {  
+    try {
+        await productDao.updateProductByID(req, res)
+    } catch (error) {
+        res.status(400).json({ error: `${error}` })
+    }
+}
+
+
+const deleteProductById = async (req, res) => {   
+    try {
+        await productDao.deleteProductById(req, res)
+    } catch (error) {
+        res.status(400).json({ error: `${error}` })
+    }
+}
+
+export const productsController = {
+    getProductById,
+    saveProduct,
+    updateProductByID,
+    deleteProductById
+}
+
+
+
+
+
+
+
+
+
+/*import fs from 'fs';
 import { fileURLToPath } from 'url'
 import path from 'path'
 
@@ -126,4 +176,4 @@ const deleteProduct = async (req, res) => {
 
 }
 
-export { getProductById, addProduct, updateProduct, deleteProduct};
+export { getProductById, addProduct, updateProduct, deleteProduct};*/
