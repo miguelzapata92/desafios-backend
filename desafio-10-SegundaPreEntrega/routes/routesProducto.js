@@ -1,22 +1,16 @@
-import express from 'express';
-import { ProductDao } from '../daos/products/productDaoMongo.js';
-import  productPostValidator from '../middlewares/productPostValidator.js';
-import authValidator from '../middlewares/authValidator.js';
-import { productsController } from '../controllers/productosController.js';
+import { Router } from "express"
+import { productsController } from '../controllers/productosController.js'
 
-const productoRouter = express.Router();
+const productsRouter = Router()
 
+productsRouter.get('/:id?', productsController.getProductById)
 
-productoRouter.get('/:id?', productsController.getProductById);
-
-//productoRouter.post('/', authValidator,  productPostValidator, (req, res) => addProduct(req, res));
-
-//productoRouter.put('/:id', authValidator,  (req, res) => updateProduct(req, res));
-
-//productoRouter.delete('/:id', (req, res) => deleteProduct(req, res));
+productsRouter.post('/', productsController.saveProduct)
 
 
+productsRouter.put('/:id', productsController.updateProductByID)
 
 
+productsRouter.delete('/:id', productsController.deleteProductById)
 
-export default productoRouter;
+export default productsRouter
