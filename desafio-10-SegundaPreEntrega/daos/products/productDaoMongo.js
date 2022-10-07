@@ -15,7 +15,7 @@ class ProductDaoMongoDb extends MongoContainer {
             if (!id) {
                 res.send(await super.getAll())
             } else {
-                const product = await super.getById(id)
+                const product = await super.getProductById(id)
                 if (product) {
                     res.send(product)
                 } else {
@@ -38,7 +38,7 @@ class ProductDaoMongoDb extends MongoContainer {
     
                 const product = req.body                                                                      
                 try {
-                    await super.save(product)                                                             
+                    await super.saveProduct(product)                                                             
                     res.status(200).json({ message: 'Producto guardado' })
                 } catch (error) {
                     res.status(400).json({ error: `${error}` })
@@ -58,7 +58,7 @@ class ProductDaoMongoDb extends MongoContainer {
                 res.status(400).json({ error: 'Los datos ingresados están incompletos'  })
             } else {
                 try {
-                    const product = await super.getById(id)
+                    const product = await super.getProductById(id)
                     if (product) {
                         product[0].name = name
                         product[0].price = price
@@ -84,7 +84,7 @@ class ProductDaoMongoDb extends MongoContainer {
         if (administrador == true) {
             const { id } = req.params
             try {
-                await super.deleteById(id)
+                await super.deleteProductById(id)
                 res.status(200).json({ message: 'Producto borrado' })
             } catch (error) {
                 res.status(400).json({ error: `${error}` })
