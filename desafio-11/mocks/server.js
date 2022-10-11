@@ -6,7 +6,8 @@ const { Server: IOServer } = require('socket.io');
 const { router } = require('./routes/routes.js');
 const path = require('path')
 const { optionsSQLite3, optionsMariaDB } = require('./options/config.js');
-const Container = require('./containers/container.js');
+const Container = require('./containers/containerKnex.js');
+const { MongoContainer } = require('./containers/MongoContainer.js');
 
 
 //const products = new Container(optionsSQLite3, 'products');
@@ -32,7 +33,7 @@ app.use('/', router);
 
 
 const products =[]
-const messages = [];
+const messages = new MongoContainer
 
 io.on('connection', (socket) => {
     console.log('Usuario Conectado')
