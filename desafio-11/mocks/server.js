@@ -6,7 +6,7 @@ const { Server: IOServer } = require('socket.io');
 const { router } = require('./routes/routes.js');
 const path = require('path')
 const { optionsSQLite3, optionsMariaDB } = require('./options/config.js');
-const Container = require('./container.js');
+const Container = require('./containers/container.js');
 
 
 //const products = new Container(optionsSQLite3, 'products');
@@ -31,7 +31,8 @@ app.set('views',  path.join(__dirname, 'views'));
 app.use('/', router);
 
 
-
+const products =[]
+const messages = [];
 
 io.on('connection', (socket) => {
     console.log('Usuario Conectado')
@@ -56,7 +57,7 @@ io.on('connection', (socket) => {
   })
 })
 
-const PORT = 8080;
+const PORT = 3000;
 
 http.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 

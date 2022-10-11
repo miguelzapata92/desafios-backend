@@ -38,9 +38,15 @@ buttonMessage?.addEventListener("click", () => {
     const date = `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`
 
     const message = {
-        email: document.getElementById("email").value,
+        author: {
+          id: document.getElementById("id").value,
+          name: document.getElementById("name").value,
+          lastname: document.getElementById("lastname").value,
+          age: document.getElementById("age").value,
+          alias: document.getElementById("alias").value,
+          avatar: document.getElementById("avatar").value,
+        },
         date: date,
-        message: document.getElementById("message").value
     }
     socket.emit('new-message', message);
 })
