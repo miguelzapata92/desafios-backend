@@ -1,14 +1,13 @@
-const {mongoose} = require("mongoose");
+const mongoose = require('mongoose');
  
 const URL = 'mongodb://localhost:27017/ecommerce'
-await mongoose.connect(URL, {useNewUrlParser: true, useUnifiedTopology: true,});
+mongoose.connect(URL, {useNewUrlParser: true, useUnifiedTopology: true,});
 
 
 export class MongoContainer {
     constructor() {
         this.collection = chat
     }
-
 
 
     async getAll () {

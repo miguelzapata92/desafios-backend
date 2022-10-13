@@ -1,20 +1,20 @@
-const express = require('express');
-const { join } = require('path');
-const { engine } = require('express-handlebars');
-const { Server: HttpServer} = require('http');
-const { Server: IOServer } = require('socket.io');
-const { router } = require('./routes/routes.js');
-const path = require('path')
+import { express } from 'express';
+import { join } from 'path';
+import engine from 'express-handlebars'
+import { Server as HTTPServer } from 'http'
+import { Server as IOServer } from 'socket.io'
+import router from './routes/routes'
+import path from 'path';
 const { optionsSQLite3, optionsMariaDB } = require('./options/config.js');
 const Container = require('./containers/containerKnex.js');
-const { MongoContainer } = require('./containers/MongoContainer.js');
+import { MongoContainer } from './containers/MongoContainer';
 
 
 //const products = new Container(optionsSQLite3, 'products');
 //const messages = new Container(optionsMariaDB, 'messages')
 
 const app = express();
-const http = new HttpServer(app);
+const http = new HTTPServer(app);
 const io = new IOServer(http);
 //middlewares
 app.use(express.json())
@@ -35,28 +35,24 @@ app.use('/', router);
 const products =[]
 const messages = new MongoContainer
 
-io.on('connection', (socket) => {
-    console.log('Usuario Conectado')
+const { MongoContainer } = await import('./containers/MongoContainer');
+persChat = new MongoContainer();
 
-    //CargarProductos
-    socket.on("new-product", async product => {
-      console.log(product);
-      products.save(product);
-      
-      socket.emit("new-products", products)
-      const dbProducts = await products.getAll();
-      io.sockets.emit("new-products", dbProducts)
-    })
+export default async (io) => {
+  io.on('connection', async (socket) => {
+  console.log('Usuario Conectado')
+  
+  
 
 
-    //chat
-    socket.on("new-message", async message =>{
-      console.log(message);
-      messages.save(message);
-      const dbMessages = await messages.getAll();
-      io.sockets.emit("new-chat-message", dbMessages);
-  })
+  socket.on("new-message", async message =>{
+    console.log(message);
+    messages.save(message);
+    const dbMessages = await messages.getAll();
+    io.sockets.emit("new-chat-message", dbMessages);
 })
+})}
+
 
 const PORT = 3000;
 

@@ -65,14 +65,6 @@ socket.on("new-chat-message", messages =>{
     document.getElementById("viewchat").innerHTML = html})
 
 
-
-
-
-
-
-
-
-
 socket.on("lista productos", productos =>{
     //parte de renderizado
 

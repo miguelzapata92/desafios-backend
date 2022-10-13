@@ -11,9 +11,6 @@ function generateProduct() {
         }
         data.push(item);
     }
-    return data
-    
-  
+    return data 
 }
-
 module.exports = {generateProduct}
