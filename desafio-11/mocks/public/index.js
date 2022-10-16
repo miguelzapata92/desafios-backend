@@ -1,13 +1,9 @@
 console.log("script ok")
 const socket = io();
 
-
-
-
-
 const button = document.getElementById("submit");
 //Cargar Productos
-button?.addEventListener("click", () => {
+/*button?.addEventListener("click", () => {
     console.log("todo ok")
     const product = {
         title: document.getElementById("title").value,
@@ -28,7 +24,7 @@ socket.on("new-products", products => {
             <td> ${product.thumbnail}</td>
         </tr>`)})
     document.getElementById("lista").innerHTML = html})
-
+*/
 //chat
 
 const buttonMessage = document.getElementById("buttonMessage");
@@ -52,24 +48,17 @@ buttonMessage?.addEventListener("click", () => {
     socket.emit('new-message', message);
 })
 
+
+//datos insertados en el html
 socket.on("all-messages", chat =>{
-    const html = chat.map(message =>{
-        
+    const html = chat.map(message =>{       
         return (`
         <div style="width:100vw">
-            <span class="fw-bold" style="color: blue;">${message.name}</span>
-            <span style="color: brown;">&nbsp[${message.date}]</span>
+            <span class="fw-bold" style="color: blue;">${message.author.name}</span>
+            <span style="color: brown;">&nbsp[${message.author.date}]</span>
             <span class="fst-italic" style="color: green;">&nbsp: ${message.text}</span>
         </div>
     `)
     }).join(' ') //el join agrega ese espacio a cada uno de los elementos del array
-    document.getElementById("viewchat").innerHTML = html})
-
-
-socket.on("lista productos", productos =>{
-    //parte de renderizado
-
-    const html = messages.map(message =>{
-        return (`<div><strong>${message.name}</strong>:<em>${message.message}</em></div>`)
-    }).join(' ') //el join agrega ese espacio a cada uno de los elementos del array
-    document.getElementById("chat").innerHTML = html;})
+    document.getElementById("viewchat").innerHTML = html
+})

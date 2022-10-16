@@ -35,6 +35,7 @@ const chatSchema = new Schema({
     }
 },{
     timestamps: false,
+    versionKey: false
 })
 
 export const chat = model(chatCollection, chatSchema)

@@ -1,9 +1,4 @@
-import mongoose from "mongoose"; 
 import { chat } from "../models/chatModel.js";
-const URL = 'mongodb://localhost:27017/ecommerce'
-await mongoose.connect(URL, {useNewUrlParser: true, useUnifiedTopology: true,});
-
-
 
 export class MongoContainer {
     constructor() {
