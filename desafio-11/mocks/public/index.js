@@ -46,19 +46,20 @@ buttonMessage?.addEventListener("click", () => {
           alias: document.getElementById("alias").value,
           avatar: document.getElementById("avatar").value,
         },
+        text: document.getElementById("text").value,
         date: date,
     }
     socket.emit('new-message', message);
 })
 
-socket.on("new-chat-message", messages =>{
-    const html = messages.map(message =>{
+socket.on("all-messages", chat =>{
+    const html = chat.map(message =>{
         
         return (`
         <div style="width:100vw">
-            <span class="fw-bold" style="color: blue;">${message.email}</span>
+            <span class="fw-bold" style="color: blue;">${message.name}</span>
             <span style="color: brown;">&nbsp[${message.date}]</span>
-            <span class="fst-italic" style="color: green;">&nbsp: ${message.message}</span>
+            <span class="fst-italic" style="color: green;">&nbsp: ${message.text}</span>
         </div>
     `)
     }).join(' ') //el join agrega ese espacio a cada uno de los elementos del array

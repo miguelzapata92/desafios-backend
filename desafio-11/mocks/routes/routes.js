@@ -1,4 +1,4 @@
-import { express } from 'express';
+import express  from 'express';
 const router = express.Router();
 
 const listaProductos = [];
@@ -7,5 +7,8 @@ router.get('/api/productos-test', (req, res) =>{
     const data  = generateProduct();
     res.send(data)
 })
+router.get('/api', (req, res)=> {
+    res.render('form')
+})
 
-module.exports = {router, listaProductos};
+export default router;
