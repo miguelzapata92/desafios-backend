@@ -46,6 +46,7 @@ io.on('connection', async (socket) => {
     console.log(message);
     await persChat.save(message);
     let chat = await persChat.getAll();
+    console.log(chat)
     io.sockets.emit("all-messages", denormalizeData(chat));
   })
 })

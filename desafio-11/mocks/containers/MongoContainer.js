@@ -1,4 +1,6 @@
 import { chat } from "../models/chatModel.js";
+import { normalizeData } from "../utils/normalize.js";
+
 
 export class MongoContainer {
     constructor() {
@@ -9,9 +11,13 @@ export class MongoContainer {
     async getAll () {
         try {
             let data = await this.collection.find({}).lean()
-            return data
+            data.forEach(obj => {
+                obj.id = obj['_id'].toString()
+                delete(obj['_id'])
+            })
+            return normalizeData(data)
         } catch (error) {
-            throw new Error
+            throw new Error(`Error al listar todo: ${error}`)
         }
     }
 

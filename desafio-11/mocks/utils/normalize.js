@@ -1,4 +1,4 @@
-import { denormalize, schema } from 'normalizr'
+import { normalize, denormalize, schema } from 'normalizr'
 
 const autor = new schema.Entity('autores', {}, { idAttribute: "id" })
 const texto = new schema.Entity('texto', {
@@ -18,6 +18,13 @@ const denormalizeData = (message) => {
     return dataDenormalizada
 }
 
+const normalizeData = (data) => {
+    const dataNormalizada = normalize(data, chatSchema)
+
+    return dataNormalizada
+}
+
 export {
-    denormalizeData
+    denormalizeData,
+    normalizeData
 }
