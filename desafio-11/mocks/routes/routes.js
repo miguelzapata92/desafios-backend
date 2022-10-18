@@ -7,7 +7,7 @@ const listaProductos = [];
 
 router.get('/api/productos-test', (req, res) =>{
     let data  = generateProduct();
-    res.render('form', data )
+    res.send(data)
 })
 router.get('/api', (req, res)=> {
     res.render('form')
