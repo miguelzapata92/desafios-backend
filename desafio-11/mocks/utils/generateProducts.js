@@ -1,8 +1,8 @@
-import faker from '@faker-js/faker'
+import {faker} from '@faker-js/faker/locale/es'
 faker.locale = 'es'
 
 function generateProduct() {
-    data =[]
+    let data =[]
     for (let index = 0; index < 5; index++) {
         const item = {
             title: faker.commerce.product(),
@@ -11,6 +11,6 @@ function generateProduct() {
         }
         data.push(item);
     }
-    return data 
+    return(data) 
 }
-module.exports = {generateProduct}
+export { generateProduct }

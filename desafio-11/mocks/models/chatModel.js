@@ -8,15 +8,15 @@ const chatSchema = new Schema({
             type: String,
             required: true
         } ,
-        nombre: {
+        name: {
             type: String,
             required: true
         } ,
-        apellido: {
+        lastname: {
             type: String,
             required: true
         } ,
-        edad: {
+        age: {
             type: String,
             required: true
         } ,

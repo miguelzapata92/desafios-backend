@@ -1,11 +1,13 @@
 import express  from 'express';
 const router = express.Router();
+import  {generateProduct} from '../utils/generateProducts.js'
+
 
 const listaProductos = [];
 
 router.get('/api/productos-test', (req, res) =>{
-    const data  = generateProduct();
-    res.send(data)
+    let data  = generateProduct();
+    res.render('form', data )
 })
 router.get('/api', (req, res)=> {
     res.render('form')

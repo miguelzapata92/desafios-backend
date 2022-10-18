@@ -62,3 +62,4 @@ socket.on("all-messages", chat =>{
     }).join(' ') //el join agrega ese espacio a cada uno de los elementos del array
     document.getElementById("viewchat").innerHTML = html
 })
+
