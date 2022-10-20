@@ -1,16 +1,13 @@
 import express  from 'express';
 const router = express.Router();
-import  {generateProduct} from '../utils/generateProducts.js'
+import login from '../middlewares/auth.js'
+import  { Controller } from '../controllers/controller.js'
 
 
-const listaProductos = [];
 
-router.get('/api/productos-test', (req, res) =>{
-    let data  = generateProduct();
-    res.send(data)
-})
-router.get('/api', (req, res)=> {
-    res.render('form')
-})
+
+router.get('/', login, Controller.form);
+router.post('/home', Controller.home);
+router.post('/logout', Controller.logout);
 
 export default router;

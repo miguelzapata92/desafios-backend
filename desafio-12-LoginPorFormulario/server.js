@@ -11,6 +11,8 @@ import persChat from './utils/persChat.js';
 import { denormalizeData } from './utils/normalize.js';
 import { fileURLToPath } from 'url';
 import mongoose from 'mongoose';
+import cookieParser from 'cookie-parser';
+import session from 'express-session';
 //const products = new Container(optionsSQLite3, 'products');
 //const messages = new Container(optionsMariaDB, 'messages')
 
@@ -25,7 +27,19 @@ const URL = 'mongodb://localhost:27017/ecommerce'
 app.use(express.json())
 app.use(express.urlencoded({extended : true}));
 app.use(express.static(path.join(__dirname, 'public')))
-
+app.use(cookieParser());
+app.use(session({
+    store: MongoStore.create({
+        mongoUrl: 'mongodb://localhost:27017/ecommerce',
+        mongoOptions: {useNewUrlParser: true, useUnifiedTopology: true},
+        ttl: 60,
+        collectionName: 'sessions'
+    }),
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true,
+    cookie: { maxAge: 60000 }
+}));
 
 app.engine('.hbs', engine({ extname: '.hbs' }))
 //seteamos el view engine

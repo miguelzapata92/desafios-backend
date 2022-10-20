@@ -3,7 +3,7 @@ const socket = io();
 
 const button = document.getElementById("submit");
 //Cargar Productos
-/*button?.addEventListener("click", () => {
+button?.addEventListener("click", () => {
     console.log("todo ok")
     const product = {
         title: document.getElementById("title").value,
@@ -24,7 +24,7 @@ socket.on("new-products", products => {
             <td> ${product.thumbnail}</td>
         </tr>`)})
     document.getElementById("lista").innerHTML = html})
-*/
+
 //chat
 
 const buttonMessage = document.getElementById("buttonMessage");
