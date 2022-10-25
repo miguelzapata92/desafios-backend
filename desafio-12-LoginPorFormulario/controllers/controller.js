@@ -4,7 +4,7 @@ const form = (req, res) => {
 
 const home = (req, res) => {
 	const { name } = req.body;
-	req.session.name = name; e
+	req.session.name = name; 
 	res.redirect('/');
 }
 

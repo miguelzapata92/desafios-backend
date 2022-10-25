@@ -10,7 +10,7 @@ import path from 'path';
 import persChat from './utils/persChat.js';
 import { denormalizeData } from './utils/normalize.js';
 import { fileURLToPath } from 'url';
-import mongoose from 'mongoose';
+import MongoStore from 'connect-mongo';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
 //const products = new Container(optionsSQLite3, 'products');
@@ -21,7 +21,7 @@ const http = new HTTPServer(app);
 const io = new IOServer(http);
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-const URL = 'mongodb://localhost:27017/ecommerce'
+const URL = 'mongodb+srv://miguel:1234@cluster0.pznwpav.mongodb.net/?retryWrites=true&w=majority'
 
 //middlewares
 app.use(express.json())
@@ -29,8 +29,9 @@ app.use(express.urlencoded({extended : true}));
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(cookieParser());
 app.use(session({
+
     store: MongoStore.create({
-        mongoUrl: 'mongodb://localhost:27017/ecommerce',
+        mongoUrl: URL,
         mongoOptions: {useNewUrlParser: true, useUnifiedTopology: true},
         ttl: 60,
         collectionName: 'sessions'
@@ -68,7 +69,6 @@ io.on('connection', async (socket) => {
 const PORT = 3000;
 
 http.listen(PORT, async () => {
-  const connection = await mongoose.connect(URL, {useNewUrlParser: true, useUnifiedTopology: true,});
   console.log("Database connected");  
   console.log(`Server on port: ${PORT}`)});
 
