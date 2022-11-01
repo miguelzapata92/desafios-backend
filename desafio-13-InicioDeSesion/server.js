@@ -15,6 +15,7 @@ import cookieParser from 'cookie-parser';
 import session from 'express-session';
 //const products = new Container(optionsSQLite3, 'products');
 //const messages = new Container(optionsMariaDB, 'messages')
+import passport from 'passport';
 
 const app = express();
 const http = new HTTPServer(app);
@@ -29,7 +30,6 @@ app.use(express.urlencoded({extended : true}));
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(cookieParser());
 app.use(session({
-
     store: MongoStore.create({
         mongoUrl: URL,
         mongoOptions: {useNewUrlParser: true, useUnifiedTopology: true},
@@ -37,10 +37,17 @@ app.use(session({
         collectionName: 'sessions'
     }),
     secret: 'secret',
-    resave: true,
-    saveUninitialized: true,
-    cookie: { maxAge: 60000 }
+    resave: false,
+    saveUninitialized: false,
+    cookie: {         
+      httpOnly: false,
+      secure: false,
+      maxAge: 100000 
+    }
 }));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.engine('.hbs', engine({ extname: '.hbs' }))
 //seteamos el view engine

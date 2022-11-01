@@ -1,12 +1,21 @@
 <section class="p-4 bg-secondary" style="--bs-bg-opacity: .5;">
 	<h2 class="text-primary mb-5">Login de usuario</h2>
 	<h5 class="mb-3">Ingrese su nombre</h5>
-	<form action="/home" method="POST">
+	<form action="/login" method="POST">
 		<div class='mb-4'>
-			<input id="name-product" class="form-control" type='text' name='name' />
+			<input id="email" class="form-control" type='email' name='email' placeholder="email"/>
 		</div>
+		<div class='mb-4'>
+			<input id="password" class="form-control" type='password' name='password' placeholder="password"/>
+		</div>
+		
 		<div class='mb-3'>
 			<input class="btn btn-success" type='submit' value='Enviar' />
+		</div>
+	</form>
+	<form action="/redirect-signup" method="POST">
+		<div class='d-flex justify-content-center'>
+			<input class="btn btn-primary" type='submit' value='Registrate' />
 		</div>
 	</form>
 </section>
