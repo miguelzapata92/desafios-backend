@@ -9,12 +9,12 @@ router.get('/', Controller.checkAuthentication,  Controller.getIndex);
 
 // Login
 router.get('/login', Controller.getLogin);
-router.post('/login', passport.authenticate('login', { failureRedirect: '/faillogin' }), Controller.postLogin);
+router.post('/login', Controller.postLogin);
 router.get('/faillogin', Controller.getFailLogin);
 
 // Signup
 router.get('/signup', Controller.getSignup);
-router.post('/signup', passport.authenticate('signup', { failureRedirect: '/failsignup' }), Controller.postSignup);
+router.post('/signup', Controller.postSignup);
 router.get('/failsignup', Controller.getFailSignup);
 
 

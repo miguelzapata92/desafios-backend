@@ -6,15 +6,15 @@ const getIndex = (req, res) => res.render('form.hbs')
 // Login
 const getLogin = (req, res) => {
 	if (req.isAuthenticated()) {
-		let { username } = req.user;
-		res.render('form.hbs', { username });
+		let { email } = req.user;
+		res.render('form.hbs', { email });
 	} else res.render('login.hbs');
 };
 
 // Process login
 const postLogin = async (req, res) => {
-	const { username, password } = req.user;
-	res.render('form.hbs', { username, password});
+	const { email, password } = req.user;
+	res.render('form.hbs', { email, password});
 }
 
 // Signup
