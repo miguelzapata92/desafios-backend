@@ -16,6 +16,7 @@ import session from 'express-session';
 //const products = new Container(optionsSQLite3, 'products');
 //const messages = new Container(optionsMariaDB, 'messages')
 import passport from 'passport';
+import mongoose from 'mongoose';
 
 const app = express();
 const http = new HTTPServer(app);
@@ -34,7 +35,7 @@ app.use(session({
         mongoUrl: URL,
         mongoOptions: {useNewUrlParser: true, useUnifiedTopology: true},
         ttl: 60,
-        collectionName: 'sessions'
+        collectionName: 'users'
     }),
     secret: 'secret',
     resave: false,
@@ -76,9 +77,10 @@ io.on('connection', async (socket) => {
 const PORT = 3000;
 
 http.listen(PORT, async () => {
-  console.log("Database connected");  
   console.log(`Server on port: ${PORT}`)});
-
+  const connection = await mongoose.connect(URL, {useNewUrlParser: true, useUnifiedTopology: true,});
+  
+  console.log("Database connected");  
 
 http.on('error', error => console.log(`Error en el servidor: ${error}`));
 

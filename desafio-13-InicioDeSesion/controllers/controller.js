@@ -13,7 +13,7 @@ const getLogin = (req, res) => {
 
 // Process login
 const postLogin = async (req, res) => {
-	const { email, password } = req.user;
+	const { email, password } = req.body;
 	res.render('form.hbs', { email, password});
 }
 
