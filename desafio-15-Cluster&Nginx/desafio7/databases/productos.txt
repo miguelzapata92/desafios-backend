@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Mouse Noga",
+    "price": "2010",
+    "urlImage": "none",
+    "description": "None",
+    "code": 101,
+    "stock": 22,
+    "id": 1,
+    "timeStamp": 1664246072477
+  },
+  {
+    "name": "Mouse Nogaaaa",
+    "price": "2010",
+    "urlImage": "none",
+    "description": "None",
+    "code": 101,
+    "stock": 22,
+    "id": 2,
+    "timeStamp": 1664246087883
+  },
+  {
+    "name": "Mouse asd",
+    "price": "2010",
+    "urlImage": "none",
+    "description": "None",
+    "code": 101,
+    "stock": 22,
+    "id": 3,
+    "timeStamp": 1664247741180
+  },
+  {
+    "name": "Mouse asd",
+    "price": "2010",
+    "urlImage": "none",
+    "description": "None",
+    "code": 101,
+    "stock": 22,
+    "id": 4,
+    "timeStamp": 1664248278075
+  }
+]
