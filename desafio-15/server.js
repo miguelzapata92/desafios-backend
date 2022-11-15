@@ -17,13 +17,15 @@ import session from 'express-session';
 //const messages = new Container(optionsMariaDB, 'messages')
 import passport from 'passport';
 import mongoose from 'mongoose';
+import {config} from 'dotenv';
+config({ path: './config/.env' })
 
 const app = express();
 const http = new HTTPServer(app);
 const io = new IOServer(http);
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-const URL = 'mongodb+srv://miguel:1234@cluster0.pznwpav.mongodb.net/?retryWrites=true&w=majority'
+const URL = process.env.MONGOATLAS;
 
 //middlewares
 app.use(express.json())
@@ -74,9 +76,9 @@ io.on('connection', async (socket) => {
   })
 })
 
-const PORT = 3000;
+const PORT = process.env.PORT;
 
-http.listen(PORT, async () => {
+http.listen(process.env.PORT || 8080, async () => {
   console.log(`Server on port: ${PORT}`)});
   const connection = await mongoose.connect(URL, {useNewUrlParser: true, useUnifiedTopology: true,});
   console.log("Database connected");  

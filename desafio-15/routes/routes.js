@@ -40,6 +40,7 @@ router.get('/info', (req, res) => {
   <li>Memoria total reservada: ${`${Math.round(
     process.memoryUsage().rss / 1024
   )} KB`}</li>
+  <li>N° Procesadores ${require('os').cpus().length}</li>
 </ul>`);
 })
 
