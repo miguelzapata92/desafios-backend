@@ -19,6 +19,7 @@ import passport from 'passport';
 import mongoose from 'mongoose';
 import {config} from 'dotenv';
 config({ path: './config/.env' })
+import logger from './logger/loggers.js'
 
 const app = express();
 const http = new HTTPServer(app);
@@ -65,6 +66,7 @@ app.use('/', router);
 
 io.on('connection', async (socket) => {
   console.log('Usuario Conectado')
+  logger.info("Nuevo Usuario Conectado")
 
 
   socket.on("new-message", async message =>{
@@ -79,9 +81,9 @@ io.on('connection', async (socket) => {
 const PORT = process.env.PORT;
 
 http.listen(process.env.PORT || 8080, async () => {
-  console.log(`Server on port: ${PORT}`)});
+  logger.info(`Servidor express escuchando en el puerto ${PORT} - PID WORKER ${process.pid}`)});
   const connection = await mongoose.connect(URL, {useNewUrlParser: true, useUnifiedTopology: true,});
-  console.log("Database connected");  
+  logger.info('Base de datos conectada')
 
 http.on('error', error => console.log(`Error en el servidor: ${error}`));
 

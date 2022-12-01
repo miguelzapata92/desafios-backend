@@ -79,7 +79,7 @@ io.on('connection', async (socket) => {
 const PORT = process.env.PORT;
 
 http.listen(process.env.PORT || 8080, async () => {
-  console.log(`Server on port: ${PORT}`)});
+  console.log(`Server on port: ${PORT} - PID WORKER ${process.pid}`)});
   const connection = await mongoose.connect(URL, {useNewUrlParser: true, useUnifiedTopology: true,});
   console.log("Database connected");  
 
